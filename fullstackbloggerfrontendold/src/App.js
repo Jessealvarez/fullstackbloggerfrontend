@@ -8,7 +8,7 @@ import BlogsPage from "./Pages/Blogs";
 const urlEndpoint = "http://localhost:4000";
 
 function App() {
-  const [serverJSON, setServerJSON] = useState({ message: null });
+  const [serverJSON, setServerJSON] = useState({ message: [] });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,12 +23,11 @@ function App() {
   return (
     <div className="App">
       <header className="header">
-        <p>Hello</p>
         <Routes>
           <Route
             path="/blogs"
-            element={<BlogsPage message={serverJSON.message} />}
-          />
+            element={<BlogsPage blogs={serverJSON.message} />}
+          ></Route>
         </Routes>
       </header>
     </div>
