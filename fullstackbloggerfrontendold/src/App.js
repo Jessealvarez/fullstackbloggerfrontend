@@ -13,8 +13,8 @@ function App() {
   const [sortOrder, setSortOrder] = useState("ASC");
   const [filterField, setFilterField] = useState("title");
   const [filterValue, setFilterValue] = useState("");
-  const [limit, setLimit] = useState(Number(10));
-  const [page, setPage] = useState(Number(1));
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {

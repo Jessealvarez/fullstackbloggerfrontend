@@ -4,6 +4,7 @@ const BlogsPage = ({
   blogs,
   sortField,
   setSortField,
+  sortOrder,
   setSortOrder,
   filterField,
   setFilterField,
@@ -18,72 +19,51 @@ const BlogsPage = ({
     <div className="blogs-page">
       <h1>Blogs Page</h1>
       <label>Sort Field:</label>
-      <select>
-        <option
-          value="title"
-          onChange={(e) => {
-            const newSortField = e.target.value;
-            setSortField(newSortField);
-          }}
-        >
-          Title
-        </option>
-        <option
-          value="author"
-          onChange={(e) => {
-            const newSortField = e.target.value;
-            setSortField(newSortField);
-          }}
-        >
-          Author
-        </option>
+      <select
+        value={sortField}
+        onChange={(event) => {
+          const newSortField = event.target.value;
+          setSortField(newSortField);
+        }}
+      >
+        <option value="title">Title</option>
+        <option value="author">Author</option>
         <option value="created">Created At</option>
       </select>
       <br />
       <label>Sort Order:</label>
-      <select>
-        <option
-          value="ASC"
-          onChange={(e) => {
-            const newSortOrder = e.target.value;
-            setSortOrder(newSortOrder);
-          }}
-        >
-          ASC
-        </option>
-        <option
-          value="DESC"
-          onChange={(e) => {
-            const newSortField = e.target.value;
-            setSortField(newSortField);
-          }}
-        >
-          DESC
-        </option>
+      <select
+        value={sortOrder}
+        onChange={(event) => {
+          const newSortOrder = event.target.value;
+          setSortOrder(newSortOrder);
+        }}
+      >
+        <option value="ASC">Ascending</option>
+        <option value="DESC">Descending</option>
       </select>
       <br />
       <label>Filter Field:</label>
-      <select>
-        <option
-          value="filter-title"
-          onChange={(e) => {
-            const newFilterField = e.target.value;
-            setFilterField(newFilterField);
-          }}
-        >
-          Title
-        </option>
-        <option
-          value="filter-author"
-          onChange={(e) => {
-            const newFilterField = e.target.value;
-            setFilterField(newFilterField);
-          }}
-        >
-          Author
-        </option>
+      <select
+        value={filterField}
+        onChange={(event) => {
+          const newFilterField = event.target.value;
+          setFilterField(newFilterField);
+        }}
+      >
+        <option value="title">Title</option>
+        <option value="author">Author</option>
       </select>
       <br />
+      <label>Filter Value: </label>
+      <input
+        type="text"
+        value={filterValue}
+        onChange={(event) => {
+          const newFilterValue = event.target.value;
+          setFilterValue(newFilterValue);
+        }}
+      ></input>
       <label>Post Limit:</label>
       <input
         type="number"
