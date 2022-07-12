@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 //Pages
 import BlogsPage from "./Pages/Blogs";
+import PostBlogPage from "./Pages/PostBlogPage";
 
 const urlEndpoint = "http://localhost:4000";
 
@@ -15,6 +16,18 @@ function App() {
   const [filterValue, setFilterValue] = useState("");
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
+
+  const blogSubmit = async (blog) => {
+    const url = `${urlEndpoint}/blogs/blog-submit?sortOrder=desc&sortField=id`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(blog),
+    });
+    const responseJSON = await response.json();
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +63,10 @@ function App() {
                 setPage={setPage}
               />
             }
+          ></Route>
+          <Route
+            path="/post-blog"
+            element={<PostBlogPage blogSubmit={blogSubmit} />}
           ></Route>
         </Routes>
       </header>
