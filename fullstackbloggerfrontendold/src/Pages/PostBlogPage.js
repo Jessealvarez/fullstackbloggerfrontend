@@ -1,23 +1,14 @@
 import React from "react";
 import { useState } from "react";
-const PostBlogPage = () => {
-  // * Add three new state variables:
-  //   * title {string}
-  //   * author {string}
-  //   * text {string}
-  // * Add the following input fields:
-  //   * title
-  //     * Should be a text input field
-  //   * author
-  //     * Should be a text input field
-  //   * text
-  //     * Should be a <textarea> field
-  // * Hook up all input fields to their corresponding state variables
-  // * Add a <button> called Submit
-  // * The Submit button should call props.blogSubmit(blogData) onClick and then programatically redirect to the home page.
+import { useNavigate } from "react-router-dom";
+import validateBlog from "../Utilities/Validation";
+
+const PostBlogPage = ({ blogSubmit }) => {
   const [blogTitle, setBlogTitle] = useState("title");
   const [blogAuthor, setBlogAuthor] = useState("author");
   const [blogText, setBlogText] = useState("text");
+  const [resMessg, setResMssg] = useState("");
+  const navigate = useNavigate();
   return (
     <div>
       <label>Title</label>
@@ -43,12 +34,26 @@ const PostBlogPage = () => {
       <br />
       <button
         type="submit"
-        onClick={() => {
-          props.blogSubmit({
+        onClick={async () => {
+          const validateBlogEntry = validateBlog({
             title: blogTitle,
             author: blogAuthor,
             text: blogText,
           });
+          if (validateBlogEntry.isValid === false) {
+            setResMssg(validateBlogEntry.mssg);
+          }
+          if (validateBlogEntry.isValid === true) {
+            const { success, message } = await blogSubmit({
+              title: blogTitle,
+              author: blogAuthor,
+              text: blogText,
+            });
+            setResMssg(message);
+            if (success === true) {
+              navigate("/");
+            }
+          }
         }}
       >
         Submit
